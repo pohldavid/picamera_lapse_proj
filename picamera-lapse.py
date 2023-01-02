@@ -2,7 +2,7 @@ import os
 import datetime
 import time
 from pathlib import Path
-import picamera 
+import picamera
 
 home_folder = os.environ["HOME"]
 
@@ -26,20 +26,23 @@ if not Path(now_folder).exists():
     Path.mkdir(Path(now_folder), parents=True)
 
 with picamera.PiCamera() as camera:
-    #camera.led = False
+    # camera.led = False
     camera.rotation = 90
-    #camera.vflip=True
-    #camera.hflip=True
-    camera.start_preview()
+    # camera.vflip=True
+    # camera.hflip=True
+    camera.start_preview()  # I suppose it settles the sensor ?
     time.sleep(2)
 
     counter = 0
-    finish = 30
+    lapse_interval = 5
+    recording_duration = 3 * 60
+    total_frames = recording_duration / lapse_interval
+    print(f"Capturing {total_frames} frames in {recording_duration} seconds using a lapse interval of {lapse_interval} of seconds.")
 
-    for filename in camera.capture_continuous(now_folder +'/img{counter:05d}.jpg'):
-        print('Captured %s' % filename)
+    for filename in camera.capture_continuous(now_folder + "/img{counter:05d}.jpg"):
+        print("Captured %s" % filename)
         print("counter", counter)
-        counter+=1
-        if counter == finish:
+        counter += 1
+        if counter == total_frames:
             break
-        time.sleep(1) # wait ? secs
+        time.sleep(lapse_interval)
