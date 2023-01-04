@@ -1,0 +1,14 @@
+# this file defines a Service for the time lapse
+# to be placed in /lib/systemd/system/time_lapse.service
+# from here:  https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
+
+[Unit]
+ Description=Time Lapse Capture Service
+ After=multi-user.target
+
+ [Service]
+ Type=idle
+ ExecStart=/usr/bin/python3 /home/pi/picamera_lapse_proj/picamera-lapse.py
+ 
+ [Install]
+ WantedBy=multi-user.target

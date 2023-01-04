@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+
 import os
 import datetime
 import time
@@ -5,6 +7,9 @@ from pathlib import Path
 import picamera
 
 home_folder = os.environ["HOME"]
+
+# for running as root
+#home_folder = '/home/pi'
 
 base_folder = "Time_Lapse"
 
@@ -34,8 +39,8 @@ with picamera.PiCamera() as camera:
     time.sleep(2)
 
     counter = 0
-    lapse_interval = 5
-    recording_duration = 3 * 60
+    lapse_interval = 3
+    recording_duration = 60 * 60 # minutes * 60
     total_frames = recording_duration / lapse_interval
     print(f"Capturing {total_frames} frames in {recording_duration} seconds using a lapse interval of {lapse_interval} of seconds.")
 
