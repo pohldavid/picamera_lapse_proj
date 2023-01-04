@@ -10,12 +10,11 @@ import PySimpleGUI as sg
 #[sg.Listbox("duration")],[sg.Button("Duration")],
 #]
 
-timelist =  []
-for i in range(1,26):
-    timelist.append(i)
-
-layout=[[sg.Combo(timelist), sg.Combo([i for i in range(10)]), sg.Combo([i for i in range(1,26)])],
-[sg.Button("Time"), sg.Button("Duration"), sg.Button("Frame Rate")]
+layout=[
+[sg.Text('Time Lapse Parameters:')],
+[sg.Text("Enter Time Lapse Interval"), sg.Combo([i for i in range(1,61)], size=(4, 1), default_value=1), sg.Radio(text = "Seconds", group_id = "lapse_sec", default=True), sg.Radio(text = "Minutes", group_id = "lapse_sec")],
+[sg.Text("   Enter Capture Duration"), sg.Combo([i for i in range(1,61)], size=(4, 1), default_value=1), sg.Radio(text = "Seconds", group_id = "duration_sec", default=True), sg.Radio(text = "Minutes", group_id = "duration_sec")],
+[sg.Text("Resulting Movie Length: "), sg.Text("idk")],
 ]
 
 # Create the window
